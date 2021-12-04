@@ -63,14 +63,14 @@ class PuzzleDay3(PuzzleInterface):
 
         a, b = get_value(ones, cnt_items)
 
-        print(a * b)
+        return a * b
 
     def solve_part_2(self):
         oxygen = filter_rating([d for d in self.puzzle_contents], 'oxygen')
         co2 = filter_rating([d for d in self.puzzle_contents], 'co2')
-        print(int(oxygen, 2) * int(co2, 2))
+        return int(oxygen, 2) * int(co2, 2)
 
 
 puzzle = PuzzleDay3(puzzle_input)
-puzzle.solve_part_1()
-puzzle.solve_part_2()
+print(f"Solution: {puzzle.solve_part_1()}")
+print(f"Solution: {puzzle.solve_part_2()}")
