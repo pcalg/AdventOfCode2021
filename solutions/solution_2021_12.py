@@ -5,6 +5,7 @@ test = False
 
 puzzle_input = read_day(12, test)
 
+
 class PuzzleDay12(PuzzleInterface):
 
     def solve_part_1(self):
@@ -12,6 +13,7 @@ class PuzzleDay12(PuzzleInterface):
 
     def solve_part_2(self):
         pass
+
 
 puzzle = PuzzleDay12(puzzle_input)
 
