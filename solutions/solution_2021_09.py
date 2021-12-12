@@ -7,6 +7,7 @@ test = False
 
 puzzle_input = read_day(9, test)
 
+
 def read_grid(puzzle_input):
     grid = defaultdict(lambda: 9)
     y = 0
@@ -18,13 +19,15 @@ def read_grid(puzzle_input):
         y += 1
     return grid
 
+
 def is_low(grid, pos, value):
     y, x = pos
     deltas = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     for dy, dx in deltas:
-            if grid[(y + dy, x + dx)] <= value:
-                return False
+        if grid[(y + dy, x + dx)] <= value:
+            return False
     return True
+
 
 def find_lows(grid):
     positions = list(grid.keys())
@@ -36,6 +39,7 @@ def find_lows(grid):
         if is_low(grid, (y, x), value):
             lows.append((y, x))
     return lows
+
 
 def basin(grid, low):
     """
@@ -64,6 +68,7 @@ def basin(grid, low):
                 visited.add((y_neighbour, x_neighbour))
     return basin_size - 1
 
+
 class PuzzleDay9(PuzzleInterface):
 
     def solve_part_1(self):
@@ -84,7 +89,6 @@ class PuzzleDay9(PuzzleInterface):
         for low in lows:
             basin_sizes.append(basin(grid, low))
         return math.prod((sorted(basin_sizes, reverse=True)[:3]))
-
 
 
 puzzle = PuzzleDay9(puzzle_input)
