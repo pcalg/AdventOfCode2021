@@ -49,6 +49,14 @@ def get_next_pattern(rules, current_pattern):
 
 
 def process_rules(rules, patterns, stats):
+    """
+    Process the rules for each pattern in the patterns dictionary
+    :param rules: All the rules
+    :param patterns: The patterns to process including count {"CH": 5, "NN": 34, }
+    :param stats: The current totals of characters added
+    :return: the updated patterns dictionary and statistics.
+    """
+
     patterns_result = {}
 
     # return next rules
@@ -85,13 +93,13 @@ class PuzzleDay14(PuzzleInterface):
             tmp_pattern = start_pattern[idx:idx + 2]
             current_patterns[tmp_pattern] = current_patterns.get(tmp_pattern, 0) + 1
 
-
         stats = Counter(start_pattern)
 
         for _ in range(40):
             current_patterns, stats = process_rules(rules, current_patterns, stats)
 
         return statistics(stats)
+
 
 puzzle = PuzzleDay14(puzzle_input)
 
