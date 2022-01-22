@@ -1,5 +1,6 @@
 from general.general import read_day
 from general.puzzle import PuzzleInterface
+from general.general import measure
 from collections import Counter
 
 test = False
@@ -35,31 +36,17 @@ def calc_output_pixel(enhancement_code, grid, background_pixel, pos):
     y, x = pos
     pixel_neighbours = [(y + dy, x + dx) for dy in range(-1, 2) for dx in range(-1, 2)]
 
-    code = ""
-    for neighbour in pixel_neighbours:
+    value = 0
+    for idx, neighbour in enumerate(pixel_neighbours):
         if neighbour not in grid:
-            code += background_pixel
+            ch = background_pixel
         else:
-            code += grid[neighbour]
+            ch = grid[neighbour]
 
-    value = code_to_number(code)
+        if ch == '#':
+            value += 2 ** (9 - idx - 1)
 
     return enhancement_code[value]
-
-
-def code_to_number(code: str):
-    """
-    Convert the code to a number.
-
-    :param code: Code is for example "...##.." a '.' is a 0 and a '#' a 1.
-    :return: The converted number.
-    """
-    total = 0
-    for n, ch in enumerate(code[::-1]):
-        if ch == '#':
-            total += 2 ** n
-
-    return total
 
 
 def simulate(enhancement_code, grid, base_grid_size, current_run):
@@ -86,6 +73,7 @@ class PuzzleDay20(PuzzleInterface):
         c = Counter(grid.values())
         return c['#']
 
+    @measure
     def solve_part_2(self):
         enhancement_code, grid, base_grid_size = parse_input(self.puzzle_contents)
 
